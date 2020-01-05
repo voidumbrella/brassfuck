@@ -77,13 +77,10 @@ impl Interpreter {
 }
 
 fn match_ops(source: &[char], to_match: &str) -> bool {
-    let mut iter = to_match.chars().zip(source.iter());
-    let mut i = 0;
-    while let Some((s, c)) = iter.next() {
+    for (s, c) in to_match.chars().zip(source.iter()) {
         if s != *c { return false; }
-        i += 1;
     }
-    i == to_match.len()
+    source.len() >= to_match.len()
 }
 
 fn parse(source: &str) -> Vec<Op> {
@@ -155,8 +152,7 @@ fn parse(source: &str) -> Vec<Op> {
     
     // Determine the addresses where each loop instructions should jump to.
     let mut stack: Vec<(usize, &mut Op)> = Vec::new();
-    let mut iter = instructions.iter_mut().enumerate();
-    while let Some((i, op)) = iter.next() {
+    for (i, op) in instructions.iter_mut().enumerate() {
         // Push address of any start of loops onto the stack.
         // If an end of loop is found, pop the matching start
         // and set the jump addresses for both to each other.
