@@ -34,7 +34,7 @@ impl Interpreter {
         }
     }
 
-    fn execute(self: &mut Interpreter, instructions: &[Op]) {
+    fn execute(&mut self, instructions: &[Op]) {
         while let Some(instruction) = instructions.get(self.ip) {
             self.ip += 1;
             let cell = &mut self.memory[self.mp];
