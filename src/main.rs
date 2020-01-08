@@ -84,10 +84,7 @@ fn match_ops(source: &[char], to_match: &str) -> bool {
 }
 
 fn parse(source: &str) -> Vec<Op> {
-    let mut instructions = Vec::new();
-
-    // Stack to store loops
-    // let mut stack = Vec::new();
+    let mut instructions = Vec::with_capacity(source.len());
 
     let source: Vec<char> = source
         .chars()
